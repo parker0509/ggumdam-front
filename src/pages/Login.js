@@ -20,6 +20,11 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
       if (!response.ok) throw new Error("로그인 실패. 이메일 또는 비밀번호를 확인하세요.");
+
+      // ✅ 여기에 토큰 저장
+        const data = await response.json();
+        localStorage.setItem("token", data.token); // <- 이 부분 추가!
+
       alert("로그인 성공!");
     } catch (err) {
       setError(err.message);

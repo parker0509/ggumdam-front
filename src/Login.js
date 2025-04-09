@@ -8,7 +8,7 @@ const Login = ({ onLogin }) => {
 
     const handleLogin = async () => {
         console.log('로그인 시도');
-        const response = await fetch('http://localhost:8080/api/login', {
+        const response = await fetch('http://localhost:8080/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
@@ -18,7 +18,7 @@ const Login = ({ onLogin }) => {
             const player = await response.json();
             console.log('로그인 성공:', player);
             onLogin(player);
-            navigate('/game'); // ✅ 로그인 성공 후 게임 페이지 이동
+            navigate('/home'); // ✅ 로그인 성공 후 게임 페이지 이동
         } else {
             const error = await response.text();
             console.log('로그인 실패:', error);

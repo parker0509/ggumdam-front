@@ -85,3 +85,25 @@
   font-size: 1.5rem;
   margin-top: 50px;
 }
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.create-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.create-button:hover {
+  background-color: #0056b3;
+}
+

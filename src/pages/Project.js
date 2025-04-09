@@ -6,16 +6,25 @@ import "./Project.css"; // 스타일 적용
 const Project = () => {
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
-    // 백엔드에서 프로젝트 리스트 가져오기
-    axios.get("http://localhost:8080/api/projects")
+    useEffect(() => {
+      const token = localStorage.getItem("token"); // 👉 저장된 JWT 토큰 꺼내오기
+
+      axios.get("http://localhost:8080/api/projects", {
+        headers: {
+          Authorization: `Bearer ${token}`, // 👉 Authorization 헤더에 토큰 추가
+        },
+      })
       .then((response) => setProjects(response.data))
       .catch((error) => console.error("프로젝트 데이터를 불러오는 중 오류 발생:", error));
-  }, []);
+    }, []);
 
   return (
     <div className="project-container">
-      <h2 className="project-title">프로젝트 목록</h2>
+      <div className="project-header">
+        <h2 className="project-title">프로젝트 목록</h2>
+        <Link to="/create-project" className="create-button">+ 프로젝트 만들기</Link>
+      </div>
+
       <div className="project-grid">
         {projects.length > 0 ? (
           projects.map((project) => (
