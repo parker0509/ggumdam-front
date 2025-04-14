@@ -1,0 +1,145 @@
+.dream-slider-section {
+  background-color: #f5f6f7;
+  padding: 60px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.dream-slider-text h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+.dream-slider-text span {
+  color: #00c4c4;
+}
+
+.dream-slider-text p {
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.dream-slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slider-container-wrapper {
+  display: flex;
+  gap: 20px; /* 카드 간 간격 */
+  width: 100%; /* 전체 너비에 맞추기 */
+  scrollbar-width: thin; /* 스크롤바 크기 조정 */
+  -ms-overflow-style: none;  /* IE/Edge에서 스크롤바 숨기기 */
+  overflow: hidden;
+}
+
+.slider-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider-page {
+  display: flex;
+  gap: 20px;
+  flex: 1 0 100%; /* 한 페이지가 100% 너비를 차지 */
+}
+
+.slider-card {
+  width: calc(23% - -4px); /* 한 줄에 4개의 카드가 들어가도록 조정, 여백 추가 */
+  height: 360px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background-color: #000;
+}
+
+.slider-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.card-info small {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.card-info h3 {
+  font-size: 22px;
+  margin: 6px 0;
+}
+
+.card-info p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.tags {
+  margin-top: 8px;
+}
+
+.tags span {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  margin-right: 4px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.arrow {
+  background-color: white;
+  border: none;
+  font-size: 30px;
+  padding: 6px 12px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.arrow.left {
+  left: 20px;
+}
+
+.arrow.right {
+  right: 20px;
+}
+
+.dots {
+  margin-top: 20px;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  border-radius: 50%;
+  background-color: #bbb;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #00c4c4;
+}

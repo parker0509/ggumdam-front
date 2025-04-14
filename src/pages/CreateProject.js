@@ -9,6 +9,7 @@ const CreateProject = () => {
     description: "",
     goalAmount: "",
     imageUrl: "",
+    tags: "", // 태그는 문자열로 입력받고, 나중에 배열로 변환
   });
 
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const CreateProject = () => {
     e.preventDefault();
 
     const token = localStorage.getItem("token"); // ✅ 로그인 후 저장된 토큰 가져오기
+    const tagsArray = formData.tags.split(",").map(tag => tag.trim()); // 태그 배열로 변환
 
     try {
       const response = await axios.post(
@@ -33,6 +35,7 @@ const CreateProject = () => {
           description: formData.description,
           goalAmount: formData.goalAmount,
           imageUrl: formData.imageUrl,
+          tags: tagsArray, // 변환된 태그 배열을 서버로 전달
         },
         {
           headers: {
@@ -95,6 +98,18 @@ const CreateProject = () => {
             name="imageUrl"
             value={formData.imageUrl}
             onChange={handleChange}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">태그</label>
+          <input
+            type="text"
+            className="form-control"
+            name="tags"
+            value={formData.tags}
+            onChange={handleChange}
+            placeholder="태그를 쉼표로 구분해서 입력"
           />
         </div>
         <button type="submit" className="btn btn-primary w-100">
