@@ -1,68 +1,415 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
+/* 네비게이션 */
+.custom-navbar {
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 6px 0; /* Reduced padding to decrease height */
+  font-family: 'Noto Sans KR', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
-.navbar-brand {
-    color: #000 !important;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-right: 100px;
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px; /* Increased gap next to the logo */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px; /* ← 좌우 여백 추가 */
 }
 
-.navbar {
-    background-color: #ffffff !important;
-    border-bottom: 2px solid #ddd;
+.logo {
+  font-size: 1.6rem; /* Reduced font size */
+  font-weight: bold;
+  color: #1e1e1e;
+  text-decoration: none;
+  margin-right: 40px; /* Increased margin-right for more space */
 }
 
-.nav-item {
-    padding: 0 8px;
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Reduced gap */
+  margin: 0;
+  padding: 0;
 }
 
-.navbar-nav .nav-link {
-    color: #333;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s ease;
+.nav-menu li a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem; /* Reduced font size */
 }
 
-.navbar-nav .nav-link:hover {
-    color: #555;
+.nav-search {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
 }
 
-.hero {
-    background-color: #2c2c2c;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
+.nav-search input {
+  width: 250px; /* Reduced width */
+  padding: 5px 10px; /* Reduced padding */
+  border: 1px solid #ccc;
+  border-radius: 20px 0 0 20px;
+  outline: none;
 }
 
-.hero .btn {
-    background-color: #007bff;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1.2rem;
-    border-radius: 30px;
+.nav-search button {
+  padding: 5px 10px; /* Reduced padding */
+  border: 1px solid #ccc;
+  border-left: none;
+  background: #fff;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
 }
 
-.product-card {
-    border: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Reduced gap */
 }
 
-.product-card:hover {
-    transform: scale(1.05);
+.nav-right a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.85rem; /* Reduced font size */
 }
 
-.footer {
-    background-color: #343a40;
-    color: white;
-    padding: 20px;
-    text-align: center;
+.project-btn {
+  background-color: #00c4c4;
+  color: white !important;
+  padding: 5px 10px; /* Reduced padding */
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* 히어로 섹션 */
+.hero-video-section {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  color: white;
+  text-align: center;
+}
+
+.hero-overlay h2 {
+  font-size: 1.6rem; /* Reduced font size */
+  font-weight: bold;
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+.start-btn {
+  background-color: #00c4c4;
+  padding: 8px 16px; /* Reduced padding */
+  border-radius: 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95rem; /* Reduced font size */
+}
+
+.project-showcase {
+  background: #f8f9fa;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.project-showcase h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.project-showcase h2 span {
+  color: #00c4c4;
+}
+.project-showcase p {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px;
+}
+
+.project-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 250px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card-overlay {
+  padding: 15px;
+  text-align: left;
+}
+
+.tags span {
+  font-size: 0.8rem;
+  color: #555;
+  margin-right: 6px;
+}
+
+.highlight-section {
+  background-color: #f6f7f9;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.highlight-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.highlight-header h2 span {
+  color: #00b2b2;
+}
+.highlight-header p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.highlight-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 0 40px;
+}
+
+.carousel-card {
+  min-width: 280px;
+  max-width: 280px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.carousel-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 16px;
+}
+.card-content .percent {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.card-content .tags {
+  color: #888;
+  font-size: 14px;
+}
+
+.carousel-btn {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.carousel-btn.left {
+  left: 10px;
+}
+.carousel-btn.right {
+  right: 10px;
+}
+
+.slider-section {
+  background-color: #f7f9fa;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.slider-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.slider-header h2 span {
+  color: #00c4c4;
+}
+
+.slider-header p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.slider-wrapper {
+  position: relative;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 0 60px;
+}
+
+.slider-card {
+  min-width: 250px;
+  max-width: 250px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.slider-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card-text {
+  padding: 16px;
+}
+
+.card-text p {
+  font-size: 0.8rem;
+  color: #444;
+  margin: 0;
+}
+
+.card-text h3 {
+  font-size: 1.2rem;
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+.tags span {
+  background: #eee;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  margin: 3px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* 슬라이더 컨테이너 설정 */
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 슬라이드 카드들을 가로로 배치 */
+.slider-container {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* 개별 슬라이드 카드 스타일 */
+.slider-card {
+  width: 300px; /* 카드 너비 */
+  margin: 0 10px; /* 카드 간격 */
+  flex-shrink: 0; /* 카드 크기 고정 */
+  height: auto; /* 카드의 높이를 내용에 맞게 자동으로 조정 */
+}
+
+/* 슬라이드 화살표 스타일 */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.slider-arrow.left {
+  left: 150px;
+}
+
+.slider-arrow.right {
+  right: 150px;
+}
+
+/* 슬라이드 점 */
+.slider-dots {
+  text-align: center;
+  margin-top: 20px;
+  z-index: 1; /* dots가 다른 요소 위에 표시되도록 */
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #ddd;
+  margin: 0 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #333;
 }

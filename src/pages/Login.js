@@ -1,35 +1,41 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom"; // ✅ 추가
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Login.css"; // 스타일 적용을 위한 CSS 파일
+import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError(null);
+  const navigate = useNavigate(); // ✅ 페이지 이동을 위한 훅
+  const location = useLocation(); // ✅ 이전 경로 정보 가져오기
 
-    // 로그인 API 호출 (예제, 실제 백엔드 API 주소로 변경 필요)
-    try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      if (!response.ok) throw new Error("로그인 실패. 이메일 또는 비밀번호를 확인하세요.");
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      setError(null);
 
-      // ✅ 여기에 토큰 저장
+      // 로그인 API 호출
+      try {
+        const response = await fetch("http://localhost:8080/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+        if (!response.ok) throw new Error("로그인 실패. 이메일 또는 비밀번호를 확인하세요.");
+
         const data = await response.json();
-        localStorage.setItem("token", data.token); // <- 이 부분 추가!
+        localStorage.setItem("token", data.token);
 
-      alert("로그인 성공!");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+        // 로그인 후 원래 페이지로 리디렉션
+        const locationState = location.state?.from || "/";
+        navigate(locationState, { replace: true });
+
+        alert("로그인 성공!");
+      } catch (err) {
+        setError(err.message);
+      }
+    };
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">

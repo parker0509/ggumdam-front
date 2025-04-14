@@ -1,0 +1,75 @@
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.about-header h1 {
+  font-size: 36px;
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+.about-header p {
+  font-size: 18px;
+  color: #666;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.about-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.about-section:hover {
+  transform: translateY(-10px); /* Hover 애니메이션 */
+}
+
+.section-icon {
+  font-size: 40px;
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+.about-section h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.about-section p, .about-section ul {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.about-section ul {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+.about-footer {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 14px;
+  color: #aaa;
+}
