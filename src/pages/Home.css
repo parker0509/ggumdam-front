@@ -103,7 +103,7 @@
   position: absolute;
   top: 30%;
   left: 50%;
-  transform: translate(-50%, -30%);
+  transform: translate(-50%, 320%);
   color: white;
   text-align: center;
 }
@@ -362,7 +362,8 @@
 /* 슬라이드 카드들을 가로로 배치 */
 .slider-container {
   display: flex;
-  transition: transform 0.5s ease;
+  transition: transform 0.7s ease;
+  padding-bottom: 20px; /* 아래쪽 여백 추가 */
 }
 
 /* 개별 슬라이드 카드 스타일 */
@@ -397,15 +398,15 @@
 .slider-dots {
   text-align: center;
   margin-top: 20px;
-  z-index: 1; /* dots가 다른 요소 위에 표시되도록 */
 }
 
 .dot {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 7px;
+  height: 7px;
   background-color: #ddd;
-  margin: 0 5px;
+  margin-top: 3px;
+  margin: 0 3px;
   border-radius: 50%;
   cursor: pointer;
 }
