@@ -5,7 +5,7 @@ import "./HomeSliderSection.css";
 const HomeSliderSection = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const cardsPerPage = 4;
+  const cardsPerPage = 4; // 한 페이지에 4개 카드
 
   const nextSlide = () => {
     setCurrentPage((prev) =>
@@ -60,12 +60,20 @@ const HomeSliderSection = () => {
                       <div className="overlay">
                         <div className="card-info">
                           <small>{project.name}</small>
-                          <h3>{project.goalAmount || project.participants + "명 참여"}</h3>
+                          <h3>{project.goalAmount + " 참여해보세요!" || project.participants + "명 참여"}</h3>
                           <p>{project.description || "간단한 설명 문구"}</p>
+                          <p>{project.tags}</p>
+
                           <div className="tags">
-                            {project.tags?.map((tag, i) => (
-                              <span key={i}>#{tag}</span>
-                            ))}
+                            {project.tags && (
+                              typeof project.tags === "string"
+                                ? project.tags.split(",").map((tag, i) => {
+                                    return <span key={i}>#{tag.trim()}</span>;
+                                  })
+                                : project.tags.map((tag, i) => {
+                                    return <span key={i}>#{tag}</span>;
+                                  })
+                            )}
                           </div>
                         </div>
                       </div>

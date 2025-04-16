@@ -1,75 +1,97 @@
+/* About.css */
 .about-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
   font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: white;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* 중앙 정렬 */
 }
 
 .about-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px; /* 여백 줄임 */
 }
 
 .about-header h1 {
-  font-size: 36px;
-  color: #4CAF50;
-  margin-bottom: 10px;
+  font-size: 32px;
+  color: #333;
+  font-weight: 700;
 }
 
 .about-header p {
   font-size: 18px;
   color: #666;
+  margin-top: 10px;
 }
 
-.about-content {
+/* Flexbox 수정 */
+.about-sections {
   display: flex;
-  flex-direction: column;
-  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px; /* 간격 줄임 */
 }
 
-.about-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.about-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
   transition: transform 0.3s ease;
+  flex: 1 1 calc(33.33% - 20px); /* 3개 컬럼으로 설정 */
+  box-sizing: border-box; /* padding과 border 포함하여 크기 계산 */
+  margin-bottom: 20px; /* 아래쪽 마진 추가 */
 }
 
-.about-section:hover {
-  transform: translateY(-10px); /* Hover 애니메이션 */
+.about-card:hover {
+  transform: translateY(-5px); /* Hover 효과 줄임 */
 }
 
-.section-icon {
+.about-icon {
   font-size: 40px;
-  color: #4CAF50;
+  color: #00c4c4;
   margin-bottom: 20px;
 }
 
-.about-section h2 {
-  font-size: 24px;
+.about-card h2 {
+  font-size: 20px;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.about-section p, .about-section ul {
+.about-card p,
+.about-card ul {
   font-size: 16px;
   color: #555;
-  line-height: 1.6;
 }
 
-.about-section ul {
-  list-style-type: decimal;
-  margin-left: 20px;
+.about-card ul {
+  list-style-type: none;
+  padding-left: 0;
 }
 
+.about-card ul li {
+  margin-bottom: 8px; /* 항목 간 간격 줄임 */
+}
+
+/* 작은 화면 대응 */
+@media (max-width: 768px) {
+  .about-card {
+    flex: 1 1 calc(50% - 20px); /* 2개 컬럼 */
+  }
+}
+
+@media (max-width: 480px) {
+  .about-card {
+    flex: 1 1 100%; /* 1개 컬럼 */
+  }
+}
+
+/* Footer */
 .about-footer {
   text-align: center;
-  margin-top: 60px;
+  margin-top: 30px;
   font-size: 14px;
-  color: #aaa;
+  color: #888;
 }
