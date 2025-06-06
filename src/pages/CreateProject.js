@@ -24,23 +24,29 @@ const CreateProject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 토큰을 주석 처리한 부분
+    /*
     const token = localStorage.getItem("token"); // ✅ 로그인 후 저장된 토큰 가져오기
     const tagsArray = formData.tags.split(",").map(tag => tag.trim()); // 태그 배열로 변환
+    */
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/projects",
+        "http://localhost:8006/api/projects",
         {
           name: formData.name,
           description: formData.description,
           goalAmount: formData.goalAmount,
           imageUrl: formData.imageUrl,
-          tags: tagsArray, // 변환된 태그 배열을 서버로 전달
+          tags: formData.tags.split(",").map(tag => tag.trim()), // 태그 배열로 변환
         },
         {
+          // 주석 처리된 토큰 헤더 부분
+          /*
           headers: {
             Authorization: `Bearer ${token}`, // ✅ 토큰을 Authorization 헤더에 포함
           },
+          */
         }
       );
 

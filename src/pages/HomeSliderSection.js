@@ -21,7 +21,7 @@ const HomeSliderSection = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/projects")
+      .get("http://localhost:8006/api/projects")
       .then((res) => {
         setProjects(res.data);
       })

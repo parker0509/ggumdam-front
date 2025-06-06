@@ -6,17 +6,11 @@ import "./Project.css"; // 스타일 적용
 const Project = () => {
   const [projects, setProjects] = useState([]);
 
-    useEffect(() => {
-      const token = localStorage.getItem("token"); // 👉 저장된 JWT 토큰 꺼내오기
-
-      axios.get("http://localhost:8080/api/projects", {
-        headers: {
-          Authorization: `Bearer ${token}`, // 👉 Authorization 헤더에 토큰 추가
-        },
-      })
+  useEffect(() => {
+    axios.get("http://localhost:8006/api/projects")
       .then((response) => setProjects(response.data))
       .catch((error) => console.error("프로젝트 데이터를 불러오는 중 오류 발생:", error));
-    }, []);
+  }, []);
 
   return (
     <div className="project-container">

@@ -34,7 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/projects")
+      .get("http://localhost:8006/api/projects")
       .then((res) => {
         setProjects(res.data);
       })
@@ -53,7 +53,7 @@ const Home = () => {
           <ul className="nav-menu">
             <li><Link to="/upcoming">오픈예정</Link></li>
             <li><Link to="/funding">펀딩 +</Link></li>
-            <li><Link to="/main">프리오더</Link></li>
+            <li><Link to="/freeorder">프리오더</Link></li>
             <li><Link to="/store">스토어</Link></li>
             <li><Link to="/more">더보기 ▾</Link></li>
           </ul>
@@ -112,11 +112,9 @@ const Home = () => {
           </div>
           <div className="footer-contact">
             <p>상담 가능 시간: 평일 오전 9시 ~ 오후 6시 (주말, 공휴일 제외)</p>
-            <p>꿈담㈜ 대표이사 신혜성</p>
+            <p>꿈담㈜ 대표이사 박한수</p>
             <p>사업자등록번호 258-87-01370</p>
-            <p>통신판매업신고번호 2021-성남분당C-1153</p>
             <p>호스팅 서비스사업자: 꿈담㈜</p>
-            <p>경기 성남시 분당구 판교로 242 PDC A동 402호</p>
             <p>이메일 상담: info@dreamcompany.kr</p>
             <p>유선 상담: 1661-9056</p>
             <p>© dreamcompany Co., Ltd.</p>

@@ -6,7 +6,8 @@ import Project from "./pages/Project";
 import ProjectDetail from "./pages/ProjectDetail";
 import CreateProject from "./pages/CreateProject";
 import About from './pages/About'; // About 페이지 import
-import Main from "./pages/Main"; // 위치에 따라 수정
+import FreeOrder from "./pages/FreeOrder"; // 위치에 따라 수정
+import FreeOrderDetails from './pages/FreeOrderDetails'; // 상세 컴포넌트 추가
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/projects/new" element={<CreateProject />} />
         <Route path="/about" element={<About />} /> {/* 수정된 부분 */}
-        <Route path="/main" element={<Main />} />
+        <Route path="/freeOrder" element={<FreeOrder />} />
+        <Route path="/free-orders/:id" element={<FreeOrderDetails />} />
       </Routes>
     </Router>
   );
