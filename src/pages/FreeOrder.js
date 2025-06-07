@@ -49,7 +49,7 @@ function FreeOrder() {
         </div>
       </nav>
 
-      <main style={{ padding: '40px' }}>
+      <main style={{ padding: '200px' }}>
         <div className="project-grid">
           {projects.map((item, index) => (
             <div

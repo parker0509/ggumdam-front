@@ -37,18 +37,20 @@
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
-  padding: 24px;
-  background-color: #f9f9f9;
+  gap: 5px;
+  padding: 200px;
+  background-color: #FFF;
 }
 
 .project-card {
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: none;
+  box-shadow: none;
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .project-card:hover {
@@ -65,12 +67,12 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0px;
 }
 
 .project-percentage {
   font-weight: bold;
-  color: #00b689; /* 와디즈 그린 */
+  color: #00b689;
   font-size: 14px;
 }
 

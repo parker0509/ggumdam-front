@@ -195,11 +195,30 @@ h1 {
 }
 
 .reward-item {
+  border: 1px solid #fafafa;
+  padding: 16px;
+  margin-bottom: 5px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  background-color: #fafafa;
+}
+
+.reward-item:hover {
+  border-color: #FFF;
+  background-color: #E2FFFA;
+}
+
+.reward-item.selected {
+  border-color: #0077ff;
+  background-color: #ffffff;
+}
+/*.reward-item {
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 16px;
   background-color: #fafafa;
-}
+}*/
 
 .reward-header {
   display: flex;
