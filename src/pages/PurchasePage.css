@@ -1,0 +1,31 @@
+.purchase-page {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+.reward-summary, .user-summary {
+  margin-bottom: 30px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+.confirm-btn {
+  padding: 12px 24px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.confirm-btn:hover {
+  background-color: #2563eb;
+}

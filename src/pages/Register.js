@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     phone: "",
@@ -22,7 +22,7 @@ const Register = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:8080/api/join/register", {
+      const response = await fetch("http://localhost:8005/api/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const Register = () => {
       }
 
       alert("회원가입 성공!");
-      navigate("/welcome");
+      navigate("/Home");
     } catch (err) {
       setError(err.message);
     }
@@ -48,7 +48,7 @@ const Register = () => {
       <form onSubmit={handleSubmit} className="mx-auto" style={{ maxWidth: "400px" }}>
         <div className="mb-3">
           <label className="form-label">이름:</label>
-          <input type="text" className="form-control" name="name" value={formData.name} onChange={handleChange} required />
+          <input type="text" className="form-control" name="username" value={formData.username} onChange={handleChange} required />
         </div>
         <div className="mb-3">
           <label className="form-label">이메일:</label>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './FreeOrderDetails.css';
 
@@ -9,6 +9,8 @@ function FreeOrderDetails() {
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
   const [rewards, setRewards] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     // 프로젝트 상세 정보 가져오기
@@ -48,11 +50,27 @@ function FreeOrderDetails() {
   };
 
   function RewardSelector({ rewards }) {
+    const handleRewardClick = (rewardId) => {
+      const token = localStorage.getItem("user-token");
+      if (!token) {
+        alert("로그인이 필요합니다!");
+        navigate("/login");
+        return;
+      }
+      // 로그인 상태면 구매 페이지로 이동
+      navigate(`/purchase?rewardId=${rewardId}`);
+    };
+
     return (
       <div className="reward-box">
         <h2>🎁 리워드 선택</h2>
         {rewards.map(reward => (
-          <div key={reward.id} className="reward-item">
+          <div
+            key={reward.id}
+            className="reward-item"
+            onClick={() => handleRewardClick(reward.id)}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="reward-header">
               <span className="price">{reward.price.toLocaleString()}원</span>
               <span className="stock">현재 {reward.remaining}개 남음</span>
@@ -66,7 +84,6 @@ function FreeOrderDetails() {
             </div>
           </div>
         ))}
-        <button className="purchase-main">예약 구매하기</button>
       </div>
     );
   }
@@ -148,8 +165,8 @@ function FreeOrderDetails() {
             </button>
           </div>
 
-      {/* 리워드 선택 UI */}
-      <RewardSelector rewards={rewards} />
+          {/* 리워드 선택 UI */}
+          <RewardSelector rewards={rewards} />
 
           <div className="company-info">
             <div className="label">메이커</div>
@@ -157,8 +174,6 @@ function FreeOrderDetails() {
           </div>
         </div>
       </main>
-
-
     </div>
   );
 }

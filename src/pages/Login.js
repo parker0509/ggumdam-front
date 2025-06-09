@@ -25,7 +25,7 @@ const Login = () => {
         if (!response.ok) throw new Error("로그인 실패. 이메일 또는 비밀번호를 확인하세요.");
 
         const data = await response.json();
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("user-token", data.token);
 
         // 로그인 후 원래 페이지로 리디렉션
         const locationState = location.state?.from || "/";
