@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// axios 대신 직접 만든 axiosInstance 사용
+import axiosInstance from '../pages/axiosInstance';
 import './PurchasePage.css';
 
 function PurchasePage() {
@@ -12,8 +13,9 @@ function PurchasePage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
+      // accessToken 변수명은 localStorage에 맞게
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
         alert("로그인이 필요합니다.");
         navigate("/login");
         return;
@@ -26,17 +28,15 @@ function PurchasePage() {
       }
 
       try {
-        // 사용자 정보 로딩
-        const userRes = await axios.get("http://localhost:8000/api/user/me", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        // axiosInstance는 인터셉터에서 자동으로 토큰 헤더 추가함
+        const userRes = await axiosInstance.get("http://localhost:8005/api/user/me");
         setUser(userRes.data);
 
-        // 리워드 정보 로딩 (orderId 제거됨)
-        const rewardRes = await axios.get(`http://localhost:8006/api/rewards/${rewardId}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const rewardRes = await axiosInstance.get(`http://localhost:8006/api/free-orders/rewards/${rewardId}`);
         setReward(rewardRes.data);
+
+        // 토큰 콘솔 출력 (debug 용)
+        console.log("현재 accessToken:", accessToken);
 
       } catch (error) {
         console.error("데이터 로딩 실패:", error);

@@ -15,19 +15,25 @@ const Login = () => {
       e.preventDefault();
       setError(null);
 
-      // 로그인 API 호출
       try {
         const response = await fetch("http://localhost:8000/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         });
+
         if (!response.ok) throw new Error("로그인 실패. 이메일 또는 비밀번호를 확인하세요.");
 
         const data = await response.json();
-        localStorage.setItem("user-token", data.token);
 
-        // 로그인 후 원래 페이지로 리디렉션
+        // 👉 백엔드에서 accessToken과 refreshToken이 오는지 확인
+        console.log("로그인 응답:", data);
+
+        // ✅ 올바른 키 이름으로 저장 (axiosInstance 기준에 맞게)
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
+
+        // ✅ 원래 위치로 리다이렉션
         const locationState = location.state?.from || "/";
         navigate(locationState, { replace: true });
 

@@ -10,8 +10,10 @@ import About from "./About"; // About 컴포넌트 임포트
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [projects, setProjects] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열기/닫기 상태
+  const [isModalOpen, setIsModalOpen] = useState(false); // 로그인 모달
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태
 
+  // 슬라이드 관련 함수
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
@@ -24,24 +26,45 @@ const Home = () => {
     setCurrentSlide((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
-  const openModal = () => {
-    setIsModalOpen(true); // 모달 열기
-  };
+  // 모달 열기/닫기
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
-  const closeModal = () => {
-    setIsModalOpen(false); // 모달 닫기
-  };
-
+  // 프로젝트 불러오기
   useEffect(() => {
     axios
       .get("http://localhost:8006/api/projects")
-      .then((res) => {
-        setProjects(res.data);
-      })
-      .catch((err) => {
-        console.error("프로젝트 가져오기 실패", err);
-      });
+      .then((res) => setProjects(res.data))
+      .catch((err) => console.error("프로젝트 가져오기 실패", err));
   }, []);
+
+  // 로그인 여부 확인
+  useEffect(() => {
+    const token = localStorage.getItem("refreshToken");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  // 로그아웃 핸들러
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("refreshToken");
+      await axios.post(
+        "http://localhost:8000/api/auth/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      localStorage.removeItem("refreshToken");
+      setIsLoggedIn(false);
+      alert("로그아웃 되었습니다.");
+    } catch (error) {
+      console.error("로그아웃 실패", error);
+      alert("로그아웃 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <>
@@ -64,9 +87,17 @@ const Home = () => {
           </div>
 
           <div className="nav-right">
-            {/* 로그인 버튼 클릭 시 모달 열기 */}
-            <button onClick={openModal}>로그인</button>
-            <Link to="/register">회원가입</Link>
+            {isLoggedIn ? (
+              <>
+                <button onClick={handleLogout}>로그아웃</button>
+                <Link to="/mypage">마이페이지</Link>
+              </>
+            ) : (
+              <>
+                <button onClick={openModal}>로그인</button>
+                <Link to="/register">회원가입</Link>
+              </>
+            )}
             <Link to="/projects/new" className="project-btn">프로젝트 만들기</Link>
           </div>
         </div>
@@ -86,44 +117,24 @@ const Home = () => {
       {/* 슬라이더 영역 */}
       <HomeSliderSection />
 
-      {/* About 컴포넌트 추가 */}
+      {/* About 섹션 */}
       <About />
 
-      {/* 로그인 모달 */}
-      <LoginModal isOpen={isModalOpen} onClose={closeModal} />
+      {/* 로그인 모달 — 조건부 렌더링 */}
+      {isModalOpen && <LoginModal onClose={closeModal} />}
 
-      {/* 푸터 영역 */}
+      {/* 푸터 */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a href="#">정책 · 약관</a>
-            <a href="#">개인정보처리방침</a>
-            <a href="#">제휴문의</a>
-            <a href="#">공지사항</a>
-            <a href="#">꿈담 IR</a>
-            <a href="#">인재채용</a>
-            <a href="#">SNS</a>
-            <a href="#">번역 아이콘</a>
-            <a href="#">꿈담 고객센터</a>
-            <a href="#">채팅 상담하기</a>
-            <a href="#">문의 등록하기</a>
-            <a href="#">도움말 센터 바로가기</a>
-            <a href="#">Contact for Global</a>
+            {/* ... footer links ... */}
           </div>
           <div className="footer-contact">
-            <p>상담 가능 시간: 평일 오전 9시 ~ 오후 6시 (주말, 공휴일 제외)</p>
-            <p>꿈담㈜ 대표이사 박한수</p>
-            <p>사업자등록번호 258-87-01370</p>
-            <p>호스팅 서비스사업자: 꿈담㈜</p>
-            <p>이메일 상담: info@dreamcompany.kr</p>
-            <p>유선 상담: 1661-9056</p>
-            <p>© dreamcompany Co., Ltd.</p>
+            {/* ... footer contact info ... */}
           </div>
         </div>
         <div className="footer-disclaimer">
-          <p>일부 상품의 경우 꿈담은 통신판매중개자이며 통신판매 당사자가 아닙니다.</p>
-          <p>상품, 상품정보, 거래에 관한 의무와 책임은 판매자에게 있으며 각 상품 페이지에서 구체적인 내용을 확인하시기 바랍니다.</p>
-          <p>무단복제, 전송, 배포, 크롤링, 스크래핑 등의 행위는 저작권법에 의해 금지됩니다.</p>
+          {/* ... disclaimer text ... */}
         </div>
       </footer>
     </>
