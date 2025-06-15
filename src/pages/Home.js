@@ -40,31 +40,34 @@ const Home = () => {
 
   // 로그인 여부 확인
   useEffect(() => {
-    const token = localStorage.getItem("refreshToken");
+    const token = localStorage.getItem("accessToken");
     setIsLoggedIn(!!token);
   }, []);
 
   // 로그아웃 핸들러
-  const handleLogout = async () => {
-    try {
-      const token = localStorage.getItem("refreshToken");
-      await axios.post(
-        "http://localhost:8000/api/auth/logout",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      localStorage.removeItem("refreshToken");
-      setIsLoggedIn(false);
-      alert("로그아웃 되었습니다.");
-    } catch (error) {
-      console.error("로그아웃 실패", error);
-      alert("로그아웃 중 오류가 발생했습니다.");
-    }
-  };
+const handleLogout = async () => {
+  try {
+    const accessToken = localStorage.getItem("accessToken"); // 여기 accessToken 써야 함
+    if (!accessToken) throw new Error("액세스 토큰이 없습니다.");
+
+    await axios.post(
+      "http://localhost:8000/api/auth/logout",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // accessToken 사용
+        },
+      }
+    );
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setIsLoggedIn(false);
+    alert("로그아웃 되었습니다.");
+  } catch (error) {
+    console.error("로그아웃 실패", error);
+    alert("로그아웃 중 오류가 발생했습니다.");
+  }
+};
 
   return (
     <>
