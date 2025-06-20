@@ -31,6 +31,7 @@ const Login = () => {
 
         // ✅ 올바른 키 이름으로 저장 (axiosInstance 기준에 맞게)
         localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken); // ✅
 
 
         // ✅ 원래 위치로 리다이렉션

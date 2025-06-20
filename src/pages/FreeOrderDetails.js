@@ -51,7 +51,7 @@ function FreeOrderDetails() {
 
   function RewardSelector({ rewards }) {
     const handleRewardClick = (rewardId) => {
-      const token = localStorage.getItem("user-token");
+      const token = localStorage.getItem("accessToken");
       if (!token) {
         alert("로그인이 필요합니다!");
         navigate("/login");
