@@ -6,12 +6,14 @@ import HomeSliderSection from "./HomeSliderSection";
 import axios from "axios";
 import LoginModal from "./LoginModal"; // 모달 컴포넌트 임포트
 import About from "./About"; // About 컴포넌트 임포트
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [projects, setProjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // 로그인 모달
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태
+  const navigate = useNavigate();
 
   // 슬라이드 관련 함수
   const goToSlide = (index) => {
@@ -78,7 +80,7 @@ const handleLogout = async () => {
 
           <ul className="nav-menu">
             <li><Link to="/upcoming">오픈예정</Link></li>
-            <li><Link to="/funding">펀딩 +</Link></li>
+            <li><Link to="/fundplus">펀딩 +</Link></li>
             <li><Link to="/freeorder">프리오더</Link></li>
             <li><Link to="/store">스토어</Link></li>
             <li><Link to="/more">더보기 ▾</Link></li>
@@ -97,7 +99,7 @@ const handleLogout = async () => {
               </>
             ) : (
               <>
-                <button onClick={openModal}>로그인</button>
+                <button onClick={() => navigate("/login")}>로그인</button>
                 <Link to="/register">회원가입</Link>
               </>
             )}

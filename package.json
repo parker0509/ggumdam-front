@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@portone/browser-sdk": "^0.0.23",
+    "@portone/server-sdk": "^0.15.0",
     "@stomp/stompjs": "^7.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -11,6 +13,7 @@
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
     "html-react-parser": "^5.2.5",
+    "jwt-decode": "^4.0.0",
     "phaser": "^3.88.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
