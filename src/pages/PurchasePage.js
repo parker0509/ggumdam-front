@@ -46,7 +46,7 @@ function PurchasePage() {
         const userRes = await axiosInstance.get("http://localhost:8005/api/user/me");
         setUser(userRes.data);
 
-        const rewardRes = await axiosInstance.get(`http://localhost:8006/api/free-orders/rewards/${rewardId}`);
+        const rewardRes = await axiosInstance.get(`http://localhost:8006/api/funding-orders/rewards/${rewardId}`);
         setReward(rewardRes.data);
       } catch (error) {
         alert("정보 로딩 실패");
@@ -81,6 +81,12 @@ function PurchasePage() {
 
   const handlePurchase = async (e) => {
     e.preventDefault();
+
+
+  // ✅ 로그: 함수 진입
+  console.log("🛒 [handlePurchase 진입] reward:", reward);
+  console.log("🎯 [handlePurchase 진입] reward.id:", reward?.id);
+
 
     if (!agree1 || !agree2 || !agree3) {
       alert("결제 진행을 위해 모든 필수 동의사항에 동의해 주세요.");
@@ -152,7 +158,7 @@ function PurchasePage() {
       await axiosInstance.post("http://localhost:8015/api/payments", {
         userId: user.id,
         orderId,
-        rewardId: reward?.id,
+        rewardId: reward.id,
         amount: totalAmount,
         impUid: payment.paymentId,
       });
