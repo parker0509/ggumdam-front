@@ -1,22 +1,24 @@
 /* 네비게이션 */
 .custom-navbar {
   background: white;
-  border-bottom: 1px solid #eee;
-  padding: 6px 0; /* Reduced padding to decrease height */
+  border-bottom: 0px solid #eee;
+  padding: 4px 0; /* Reduced padding to decrease height */
   font-family: 'Noto Sans KR', sans-serif;
   position: sticky;
   top: 0;
   z-index: 999;
+    height: 60px; /* 원하는 높이 */
 }
 
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px; /* Increased gap next to the logo */
-  max-width: 1200px;
+  gap: 15px; /* Increased gap next to the logo */
+  max-width: 500px;
   margin: 0 auto;
-  padding: 0 40px; /* ← 좌우 여백 추가 */
+  padding: 2px 20px
+
 }
 
 .logo {
@@ -39,13 +41,15 @@
   text-decoration: none;
   font-weight: 500;
   color: #333;
-  font-size: 0.9rem; /* Reduced font size */
+  font-size: 0.8rem !important/* Reduced font size */
 }
 
 .nav-search {
+  margin-top: 10px;
   flex-grow: 1;
   display: flex;
   justify-content: center;
+  position: relative; /* ✅ 추가 */
 }
 
 .nav-search input {
@@ -77,6 +81,20 @@
   font-size: 0.85rem; /* Reduced font size */
 }
 
+.nav-login-btn {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.nav-login-btn:hover {
+  background-color: #f0f0f0;
+}
+
 .project-btn {
   background-color: #00c4c4;
   color: white !important;
@@ -91,6 +109,8 @@
   width: 100%;
   height: 75vh;
   overflow: hidden;
+
+
 }
 
 .hero-video {
@@ -101,9 +121,9 @@
 
 .hero-overlay {
   position: absolute;
-  top: 30%;
+  top: 20%;
   left: 50%;
-  transform: translate(-50%, 380%);
+  transform: translate(-50%, 480%);
   color: white;
   text-align: center;
 }
@@ -312,3 +332,28 @@
 }
 
 
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  z-index: 999;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.search-suggestions li {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search-suggestions li:hover {
+  background-color: #f2f2f2;
+}

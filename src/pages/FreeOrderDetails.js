@@ -14,7 +14,7 @@ function FreeOrderDetails() {
 
   useEffect(() => {
     // 프로젝트 상세 정보 가져오기
-    axios.get(`http://localhost:8006/api/free-orders/${id}`)
+    axios.get(`http://localhost:9000/api/free-orders/${id}`)
       .then(response => {
         setItem(response.data);
         setLikes(response.data.likes || 0);
@@ -24,7 +24,7 @@ function FreeOrderDetails() {
       });
 
     // 리워드 목록 가져오기
-    axios.get(`http://localhost:8006/api/free-orders/${id}/rewards`)
+    axios.get(`http://localhost:9000/api/free-orders/${id}/rewards`)
       .then(response => {
         setRewards(response.data);
       })
@@ -39,7 +39,7 @@ function FreeOrderDetails() {
       return;
     }
 
-    axios.post(`http://localhost:8006/api/free-orders/${id}/like`)
+    axios.post(`http://localhost:9000/api/free-orders/${id}/like`)
       .then(() => {
         setLikes(prev => prev + 1);
         setLiked(true);

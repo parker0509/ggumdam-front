@@ -3,35 +3,76 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './FundingPlusDetails.css';
 
+function RewardSelector({ rewards, onSelectReward }) {
+  return (
+    <div className="reward-box">
+      <h2>🎁 리워드 선택</h2>
+      {rewards.map((reward) => (
+        <div
+          key={reward.id}
+          className="reward-item"
+          onClick={() => onSelectReward(reward.id)}
+          style={{ cursor: 'pointer' }}
+        >
+          <div className="reward-header">
+            <span className="price">{reward.price.toLocaleString()}원</span>
+            <span className="stock">현재 {reward.remaining}개 남음</span>
+          </div>
+          <div className="reward-title">{reward.title}</div>
+          <div className="reward-desc">{reward.desc}</div>
+          <div className="reward-meta">
+            <div>배송비: {reward.shippingFee.toLocaleString()}원</div>
+            <div>발송 시작일: {reward.deliveryDate}</div>
+            <div>제한 수량: {reward.limit}개</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function FreeOrderDetails() {
   const { id } = useParams();
   const [item, setItem] = useState(null);
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
   const [rewards, setRewards] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // ✅ 로그인 상태 추가
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken"); // ✅ 로그인 상태 초기화
+    setIsLoggedIn(!!token);
+  }, []);
 
   useEffect(() => {
-    // 프로젝트 상세 정보 가져오기
-    axios.get(`http://localhost:8006/api/funding-orders/${id}`)
+    axios.get(`/api/funding-orders/${id}`)
       .then(response => {
         setItem(response.data);
         setLikes(response.data.likes || 0);
       })
       .catch(error => {
         console.error("프로젝트 상세 정보 요청 실패", error);
+        alert("프로젝트 정보를 불러오는데 실패했습니다.");
       });
 
-    // 리워드 목록 가져오기
-    axios.get(`http://localhost:8006/api/funding-orders/${id}/rewards`)
+    axios.get(`/api/funding-orders/${id}/rewards`)
       .then(response => {
         setRewards(response.data);
       })
       .catch(error => {
         console.error("리워드 목록 요청 실패", error);
+        alert("리워드 목록을 불러오는데 실패했습니다.");
       });
   }, [id]);
+
+  const handleLogout = () => { // ✅ 로그아웃 함수 추가
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setIsLoggedIn(false);
+    alert("로그아웃 되었습니다.");
+    navigate("/");
+  };
 
   const handleLike = () => {
     if (liked) {
@@ -39,7 +80,7 @@ function FreeOrderDetails() {
       return;
     }
 
-    axios.post(`http://localhost:8006/api/funding-orders/${id}/like`)
+    axios.post(`/api/funding-orders/${id}/like`)
       .then(() => {
         setLikes(prev => prev + 1);
         setLiked(true);
@@ -49,52 +90,21 @@ function FreeOrderDetails() {
       });
   };
 
-  function RewardSelector({ rewards }) {
-    const handleRewardClick = (rewardId) => {
-      const token = localStorage.getItem("accessToken");
-      if (!token) {
-        alert("로그인이 필요합니다!");
-        navigate("/login");
-        return;
-      }
-      // 로그인 상태면 구매 페이지로 이동
-      navigate(`/purchase?rewardId=${rewardId}`);
-    };
-
-    return (
-      <div className="reward-box">
-        <h2>🎁 리워드 선택</h2>
-        {rewards.map(reward => (
-          <div
-            key={reward.id}
-            className="reward-item"
-            onClick={() => handleRewardClick(reward.id)}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="reward-header">
-              <span className="price">{reward.price.toLocaleString()}원</span>
-              <span className="stock">현재 {reward.remaining}개 남음</span>
-            </div>
-            <div className="reward-title">{reward.title}</div>
-            <div className="reward-desc">{reward.desc}</div>
-            <div className="reward-meta">
-              <div>배송비: {reward.shippingFee.toLocaleString()}원</div>
-              <div>발송 시작일: {reward.deliveryDate}</div>
-              <div>제한 수량: {reward.limit}개</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
   const handleShare = () => {
     const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-      alert("📋 페이지 링크가 복사되었습니다!");
-    }).catch(() => {
-      alert("❌ 링크 복사에 실패했습니다.");
-    });
+    navigator.clipboard.writeText(url)
+      .then(() => alert("📋 페이지 링크가 복사되었습니다!"))
+      .catch(() => alert("❌ 링크 복사에 실패했습니다."));
+  };
+
+  const handleRewardClick = (rewardId) => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      alert("로그인이 필요합니다!");
+      navigate("/login");
+      return;
+    }
+    navigate(`/purchase?rewardId=${rewardId}`);
   };
 
   if (!item) return <div className="loading">로딩 중...</div>;
@@ -115,8 +125,18 @@ function FreeOrderDetails() {
             <button>🔍</button>
           </div>
           <div className="nav-right">
-            <a href="/login">로그인</a>
-            <a href="/signup">회원가입</a>
+            {/* ✅ 조건부 렌더링 */}
+            {isLoggedIn ? (
+              <>
+                <button onClick={handleLogout} className="nav-link-btn">로그아웃</button>
+                <a href="/mypage">마이페이지</a>
+              </>
+            ) : (
+              <>
+                <a href="/login">로그인</a>
+                <a href="/signup">회원가입</a>
+              </>
+            )}
             <a href="/projects/new" className="project-btn">프로젝트 올리기</a>
           </div>
         </div>
@@ -148,13 +168,17 @@ function FreeOrderDetails() {
             </div>
           </div>
 
-          <button className="purchase-btn">예약 구매하기</button>
+          <button className="purchase-btn" onClick={() => alert("리워드를 선택해주세요.")}>
+            예약 구매하기
+          </button>
 
           <div className="support-note">
             {item.supporters}명이 지지서명 했어요
           </div>
 
-          <button className="support-btn">지지서명 하기</button>
+          <button className="support-btn" onClick={() => alert("지지서명 기능 준비중입니다.")}>
+            지지서명 하기
+          </button>
 
           <div className="action-icons">
             <button onClick={handleLike} className="like-btn">
@@ -165,8 +189,7 @@ function FreeOrderDetails() {
             </button>
           </div>
 
-          {/* 리워드 선택 UI */}
-          <RewardSelector rewards={rewards} />
+          <RewardSelector rewards={rewards} onSelectReward={handleRewardClick} />
 
           <div className="company-info">
             <div className="label">메이커</div>

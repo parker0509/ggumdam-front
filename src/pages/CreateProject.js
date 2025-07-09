@@ -32,7 +32,7 @@ const CreateProject = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8006/api/projects",
+        "http://localhost:9000/api/projects",
         {
           name: formData.name,
           description: formData.description,

@@ -79,7 +79,12 @@ body {
 
 .left-image img {
   width: 100%;
+  max-width: 700px;    /* ✅ 최대 너비 제한 */
+  max-height: 700px;   /* ✅ 최대 높이 제한 */
+  object-fit: contain; /* ✅ 비율 유지하면서 축소 */
   border-radius: 10px;
+  display: block;
+  margin: 0 auto;       /* ✅ 중앙 정렬 (선택) */
 }
 
 .right-content {

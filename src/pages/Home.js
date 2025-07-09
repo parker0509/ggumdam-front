@@ -1,75 +1,69 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// Home.jsx
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import heroVideo from "../assets/hero-video.mp4";
 import HomeSliderSection from "./HomeSliderSection";
 import axios from "axios";
-import LoginModal from "./LoginModal"; // 모달 컴포넌트 임포트
-import About from "./About"; // About 컴포넌트 임포트
-import { useNavigate } from "react-router-dom";
+import LoginModal from "./LoginModal";
+import About from "./About";
+import SearchDropdown from "./SearchDropdown"; // 🔍 추가
 
 const Home = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [projects, setProjects] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // 로그인 모달
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const searchRef = useRef(null);
   const navigate = useNavigate();
 
-  // 슬라이드 관련 함수
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
+  const recommendedKeywords = [
+    "꿈담에디션", "마감임박", "스토어BEST", "패션추천",
+    "충전기", "건강식품", "스킨케어", "간식", "화장품",
+  ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % projects.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + projects.length) % projects.length);
-  };
-
-  // 모달 열기/닫기
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  // 프로젝트 불러오기
   useEffect(() => {
     axios
-      .get("http://localhost:8006/api/projects")
+      .get("/api/projects")
       .then((res) => setProjects(res.data))
       .catch((err) => console.error("프로젝트 가져오기 실패", err));
   }, []);
 
-  // 로그인 여부 확인
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     setIsLoggedIn(!!token);
   }, []);
 
-  // 로그아웃 핸들러
-const handleLogout = async () => {
-  try {
-    const accessToken = localStorage.getItem("accessToken"); // 여기 accessToken 써야 함
-    if (!accessToken) throw new Error("액세스 토큰이 없습니다.");
-
-    await axios.post(
-      "http://localhost:8000/api/auth/logout",
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // accessToken 사용
-        },
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setIsSearchFocused(false);
       }
-    );
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    setIsLoggedIn(false);
-    alert("로그아웃 되었습니다.");
-  } catch (error) {
-    console.error("로그아웃 실패", error);
-    alert("로그아웃 중 오류가 발생했습니다.");
-  }
-};
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) throw new Error("액세스 토큰이 없습니다.");
+
+      await axios.post("http://localhost:8000/api/auth/logout", {}, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      setIsLoggedIn(false);
+      alert("로그아웃 되었습니다.");
+    } catch (error) {
+      console.error("로그아웃 실패", error);
+      alert("로그아웃 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <>
@@ -82,13 +76,29 @@ const handleLogout = async () => {
             <li><Link to="/upcoming">오픈예정</Link></li>
             <li><Link to="/fundplus">펀딩 +</Link></li>
             <li><Link to="/freeorder">프리오더</Link></li>
-            <li><Link to="/store">스토어</Link></li>
             <li><Link to="/more">더보기 ▾</Link></li>
           </ul>
 
-          <div className="nav-search">
-            <input type="text" placeholder="새로운 일상이 필요하신가요?" />
+          {/* 🔍 검색영역 */}
+          <div className="nav-search" ref={searchRef}>
+            <input
+              type="text"
+              placeholder="새로운 일상이 필요하신가요?"
+              value={searchInput}
+              onFocus={() => setIsSearchFocused(true)}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
             <button>🔍</button>
+            {isSearchFocused && (
+              <SearchDropdown
+                keywords={recommendedKeywords}
+                onKeywordSelect={(keyword) => {
+                  setSearchInput(keyword);
+                  setIsSearchFocused(false);
+                }}
+                onClose={() => setIsSearchFocused(false)}
+              />
+            )}
           </div>
 
           <div className="nav-right">
@@ -99,7 +109,7 @@ const handleLogout = async () => {
               </>
             ) : (
               <>
-                <button onClick={() => navigate("/login")}>로그인</button>
+                <button className="nav-login-btn" onClick={() => navigate("/login")}>로그인</button>
                 <Link to="/register">회원가입</Link>
               </>
             )}
@@ -119,28 +129,17 @@ const handleLogout = async () => {
         </div>
       </section>
 
-      {/* 슬라이더 영역 */}
       <HomeSliderSection />
-
-      {/* About 섹션 */}
       <About />
 
-      {/* 로그인 모달 — 조건부 렌더링 */}
-      {isModalOpen && <LoginModal onClose={closeModal} />}
+      {isModalOpen && <LoginModal onClose={() => setIsModalOpen(false)} />}
 
-      {/* 푸터 */}
       <footer className="footer">
         <div className="footer-content">
-          <div className="footer-links">
-            {/* ... footer links ... */}
-          </div>
-          <div className="footer-contact">
-            {/* ... footer contact info ... */}
-          </div>
+          <div className="footer-links">{/* ... */}</div>
+          <div className="footer-contact">{/* ... */}</div>
         </div>
-        <div className="footer-disclaimer">
-          {/* ... disclaimer text ... */}
-        </div>
+        <div className="footer-disclaimer">{/* ... */}</div>
       </footer>
     </>
   );

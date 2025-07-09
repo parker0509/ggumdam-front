@@ -22,7 +22,7 @@ const Register = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:8005/api/user/register", {
+      const response = await fetch("http://localhost:9000/api/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,9 +42,9 @@ const Register = () => {
   };
 
   // OAuth 로그인 페이지 URL (백엔드 OAuth 콜백 앞단 URL)
-  const kakaoAuthUrl = "http://localhost:8000/oauth2/authorize/kakao";   // 예: 백엔드에서 카카오 인가 요청 시작점
-  const naverAuthUrl = "http://localhost:8000/oauth2/authorize/naver";
-  const googleAuthUrl = "http://localhost:8000/oauth2/authorize/google";
+  const kakaoAuthUrl = "http://localhost:9000/oauth2/authorize/kakao";   // 예: 백엔드에서 카카오 인가 요청 시작점
+  const naverAuthUrl = "http://localhost:9000/oauth2/authorize/naver";
+  const googleAuthUrl = "http://localhost:9000/oauth2/authorize/google";
 
   // 실제 URL은 백엔드 OAuth2 인가 요청 URL에 맞게 조정 필요
 

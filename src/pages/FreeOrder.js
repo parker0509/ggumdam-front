@@ -9,7 +9,7 @@ function FreeOrder() {
   const navigate = useNavigate(); // ✅ 추가
 
   useEffect(() => {
-    axios.get('http://localhost:8006/web/main')
+    axios.get('http://localhost:9000/web/main')
       .then(response => {
         setMessage(response.data);
       })
@@ -17,7 +17,7 @@ function FreeOrder() {
         console.error("메인 메시지 요청 실패", error);
       });
 
-    axios.get('http://localhost:8006/api/free-orders')
+    axios.get('http://localhost:9000/api/free-orders')
       .then(response => {
         setProjects(response.data);
       })

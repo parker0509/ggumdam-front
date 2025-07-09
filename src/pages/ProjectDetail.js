@@ -18,7 +18,7 @@ const ProjectDetail = () => {
     const amount = prompt("투자할 금액을 입력하세요 (숫자만):");
 
     if (amount && !isNaN(amount)) {
-      axios.post(`http://localhost:8006/funding/${id}/support`, null, {
+      axios.post(`http://localhost:9000/funding/${id}/support`, null, {
         params: {
           amount: amount,
           isSuccess: true

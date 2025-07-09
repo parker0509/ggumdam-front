@@ -1,46 +1,108 @@
-/* Login.css */
-.login-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #fff;
+body {
+  background-color: #fff;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.8rem
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-logo {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.login-box {
+  width: 600px;
+  padding: 80px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
   text-align: center;
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+}
+.nav-menu li a {
+  font-size: 0.75rem; /* 적당히 줄인 크기 */
 }
 
-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+.email-login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #e8f7f9;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 6px;
+  color: #007c91;
+  font-weight: 600;
+  margin-bottom: 15px;
 }
 
-button:hover {
-  background-color: #0056b3;
+.kakao-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #fee500;
+  color: #3c1e1e;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
 
-.error-message {
-  color: red;
-  font-size: 14px;
+.naver-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #03c75a;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 20px;
 }
 
-.register-link {
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.social-icons img {
+  width: 36px;
+  height: 36px;
+}
+
+.login-links {
+  font-size: 15px;
+  color: #666;
   margin-top: 10px;
+}
+
+.qr-section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.qr-text {
   font-size: 14px;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.qr-img {
+  width: 200px;
+  height: 200px;
 }

@@ -43,10 +43,12 @@ function PurchasePage() {
       }
 
       try {
+        // user-service 호출 - 주소는 auth-service가 8005 포트라면 그대로 둬도 됩니다.
         const userRes = await axiosInstance.get("http://localhost:8005/api/user/me");
         setUser(userRes.data);
 
-        const rewardRes = await axiosInstance.get(`http://localhost:8006/api/funding-orders/rewards/${rewardId}`);
+        // project-service 호출 시 프록시를 사용하기 때문에 상대경로로 변경
+        const rewardRes = await axiosInstance.get(`/api/funding-orders/rewards/${rewardId}`);
         setReward(rewardRes.data);
       } catch (error) {
         alert("정보 로딩 실패");
@@ -82,11 +84,8 @@ function PurchasePage() {
   const handlePurchase = async (e) => {
     e.preventDefault();
 
-
-  // ✅ 로그: 함수 진입
-  console.log("🛒 [handlePurchase 진입] reward:", reward);
-  console.log("🎯 [handlePurchase 진입] reward.id:", reward?.id);
-
+    console.log("🛒 [handlePurchase 진입] reward:", reward);
+    console.log("🎯 [handlePurchase 진입] reward.id:", reward?.id);
 
     if (!agree1 || !agree2 || !agree3) {
       alert("결제 진행을 위해 모든 필수 동의사항에 동의해 주세요.");
@@ -114,13 +113,14 @@ function PurchasePage() {
 
     const paymentId = randomId();
     const totalAmount = getTotalPrice();
-  console.log("🔥 reward 객체:", reward);
-  console.log("🎯 reward.id:", reward?.id);
+
+    console.log("🔥 reward 객체:", reward);
+    console.log("🎯 reward.id:", reward?.id);
 
     try {
       const payment = await PortOne.requestPayment({
-        storeId: "store-e4038486-8d83-41a5-acf1-844a009e0d94", // 본인 스토어 아이디로 교체하세요
-        channelKey: "channel-key-ebe7daa6-4fe4-41bd-b17d-3495264399b5", // 본인 채널키로 교체하세요
+        storeId: "store-e4038486-8d83-41a5-acf1-844a009e0d94",
+        channelKey: "channel-key-ebe7daa6-4fe4-41bd-b17d-3495264399b5",
         paymentId,
         orderName: reward.title,
         totalAmount,
@@ -141,7 +141,7 @@ function PurchasePage() {
       }
 
       // 주문 생성 API 호출
-      const orderRes = await axiosInstance.post("http://localhost:8010/api/orders", {
+      const orderRes = await axiosInstance.post("/api/orders", {
         userId: user.id,
         rewardId: reward.id,
         totalAmount,
@@ -155,7 +155,7 @@ function PurchasePage() {
       const orderId = orderRes.data.id;
 
       // 결제 기록 저장 API 호출
-      await axiosInstance.post("http://localhost:8015/api/payments", {
+      await axiosInstance.post("/api/payments", {
         userId: user.id,
         orderId,
         rewardId: reward.id,

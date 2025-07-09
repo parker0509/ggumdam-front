@@ -10,7 +10,7 @@ function FreeOrder() {
 
   useEffect(() => {
 
-    axios.get('http://localhost:8006/api/funding-orders')
+    axios.get('http://localhost:9000/api/funding-orders')
       .then(response => {
         setProjects(response.data);
       })

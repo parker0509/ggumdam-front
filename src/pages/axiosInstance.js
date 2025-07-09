@@ -2,15 +2,15 @@ import axios from 'axios';
 
 // 기본 axios 인스턴스
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: '',  // 또는 baseURL: undefined
   withCredentials: false,
 });
 
-// ✅ 리프레시 토큰 요청용 별도 인스턴스 (인터셉터 없음)
 const refreshInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: '',
   withCredentials: false,
 });
+
 
 let isRefreshing = false;
 let failedQueue = [];
