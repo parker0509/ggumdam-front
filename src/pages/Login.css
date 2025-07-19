@@ -1,15 +1,18 @@
-body {
-  background-color: #fff;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 0.8rem
-}
 
 .login-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  height: 100vh;
+  flex: 1;
+  margin-top: 60px;
 }
 
 .login-logo {
@@ -103,6 +106,6 @@ body {
 }
 
 .qr-img {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
 }

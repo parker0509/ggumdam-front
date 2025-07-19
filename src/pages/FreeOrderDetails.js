@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './FreeOrderDetails.css';
+import './Nav.css'
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 function FreeOrderDetails() {
   const { id } = useParams();
@@ -10,6 +11,8 @@ function FreeOrderDetails() {
   const [liked, setLiked] = useState(false);
   const [rewards, setRewards] = useState([]);
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
 
   useEffect(() => {
@@ -38,7 +41,6 @@ function FreeOrderDetails() {
       alert("이미 찜한 프로젝트입니다!");
       return;
     }
-
     axios.post(`http://localhost:9000/api/free-orders/${id}/like`)
       .then(() => {
         setLikes(prev => prev + 1);
@@ -47,6 +49,14 @@ function FreeOrderDetails() {
       .catch(() => {
         alert("찜하기에 실패했습니다.");
       });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setIsLoggedIn(false);
+    alert("로그아웃 되었습니다.");
+    navigate("/");
   };
 
   function RewardSelector({ rewards }) {
@@ -100,27 +110,36 @@ function FreeOrderDetails() {
   if (!item) return <div className="loading">로딩 중...</div>;
 
   return (
-    <div>
-      {/* 네비게이션 바 */}
-      <nav className="custom-navbar">
-        <div className="nav-container">
-          <a href="/" className="logo">꿈담</a>
-          <ul className="nav-menu">
-            <li><a href="/">홈</a></li>
-            <li><a href="/projects">프로젝트</a></li>
-            <li><a href="/about">소개</a></li>
-          </ul>
-          <div className="nav-search">
-            <input type="text" placeholder="검색어 입력" />
-            <button>🔍</button>
+    <>
+      {/* 네비게이션 */}
+        <nav className="custom-navbar">
+          <div className="nav-container">
+            <div className="nav-left">
+              <Link to="/" className="logo">꿈담</Link>
+              <ul className="nav-menu">
+                <li><Link to="/upcoming">오픈예정</Link></li>
+                <li><Link to="/fundplus">펀딩 +</Link></li>
+                <li><Link to="/freeorder">프리오더</Link></li>
+                <li><Link to="/more">더보기 ▾</Link></li>
+              </ul>
+            </div>
+
+            <div className="nav-right">
+              {isLoggedIn ? (
+                <>
+                  <button onClick={handleLogout}>로그아웃</button>
+                  <Link to="/mypage">마이페이지</Link>
+                </>
+              ) : (
+                <>
+                  <button className="nav-login-btn" onClick={() => navigate("/login")}>로그인</button>
+                  <Link to="/register">회원가입</Link>
+                </>
+              )}
+              <Link to="/projects/new" className="project-btn">프로젝트 만들기</Link>
+            </div>
           </div>
-          <div className="nav-right">
-            <a href="/login">로그인</a>
-            <a href="/signup">회원가입</a>
-            <a href="/projects/new" className="project-btn">프로젝트 올리기</a>
-          </div>
-        </div>
-      </nav>
+        </nav>
 
       {/* 상세 페이지 본문 */}
       <main className="detail-container">
@@ -174,7 +193,7 @@ function FreeOrderDetails() {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

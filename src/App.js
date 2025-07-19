@@ -12,6 +12,7 @@ import FundingPlus from './pages/FundingPlus';
 import FundingPlusDetails from './pages/FundingPlusDetails';
 import PurchasePage from './pages/PurchasePage';
 import useAutoLogout from "./hooks/useAutoLogout";
+import SearchResults from './pages/SearchResults'; // 👈 추가
 
 function App() {
 
@@ -32,6 +33,10 @@ function App() {
         <Route path="/purchase" element={<PurchasePage />} />
         <Route path="/fundplus" element={<FundingPlus />} />
         <Route path="/funding-orders/:id" element={<FundingPlusDetails />} />
+        <Route path="/search" element={<SearchResults />} /> {/* 👈 추가 */}
+
+
+
       </Routes>
     </Router>
   );

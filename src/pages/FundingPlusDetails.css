@@ -1,90 +1,21 @@
-body {
-  margin: 0;
-  font-family: 'Pretendard', sans-serif;
-}
-
-.custom-navbar {
-  background-color: white;
-  border-bottom: 1px solid #eee;
-  padding: 12px 40px;
-  display: flex;
-  justify-content: center;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1280px;
-  align-items: center;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000000;
-  text-decoration: none;
-}
-
-.nav-menu {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-
-.nav-menu li a {
-  text-decoration: none;
-  color: #333;
-  font-size: 16px;
-}
-
-.nav-search input {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.nav-search button {
-  margin-left: 4px;
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.nav-right a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
-}
-
-.project-btn {
-  padding: 6px 12px;
-  background-color: #00C4C4;
-  color: white;
-  border-radius: 6px;
-}
+/* 네비게이션 관련 스타일 제거 */
 
 .detail-container {
-  max-width: 1280px;
+  max-width: 1100px;
   margin: 40px auto;
   display: flex;
-  gap: 40px;
-  padding: 0 40px;
+  gap: 60px;
+  padding: 0 20px;
 }
 
 .left-image img {
-  width: 100%;
-  max-width: 700px;    /* ✅ 최대 너비 제한 */
-  max-height: 700px;   /* ✅ 최대 높이 제한 */
-  object-fit: contain; /* ✅ 비율 유지하면서 축소 */
+  width: 90%;
+  max-width: 700px;
+  max-height: 700px;
+  object-fit: contain;
   border-radius: 10px;
   display: block;
-  margin: 0 auto;       /* ✅ 중앙 정렬 (선택) */
+  margin: 0 auto;
 }
 
 .right-content {
@@ -97,13 +28,8 @@ body {
   margin-bottom: 10px;
 }
 
-h1 {
-  font-size: 24px;
-  margin: 0 0 10px;
-}
-
 .short-desc {
-  font-size: 16px;
+  font-size: 15px;
   color: #444;
   margin-bottom: 20px;
 }
@@ -119,7 +45,7 @@ h1 {
 }
 
 .stats strong {
-  font-size: 22px;
+  font-size: 20px;
   display: block;
 }
 
@@ -184,6 +110,7 @@ h1 {
   text-align: center;
   font-size: 18px;
 }
+
 .reward-box {
   margin-top: 32px;
   padding: 20px;
@@ -218,12 +145,6 @@ h1 {
   border-color: #0077ff;
   background-color: #ffffff;
 }
-/*.reward-item {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 16px;
-  background-color: #fafafa;
-}*/
 
 .reward-header {
   display: flex;

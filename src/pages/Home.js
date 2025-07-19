@@ -17,18 +17,11 @@ const Home = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const searchRef = useRef(null);
   const navigate = useNavigate();
-
+  const [searchType, setSearchType] = useState("free"); // free or funding
   const recommendedKeywords = [
     "꿈담에디션", "마감임박", "스토어BEST", "패션추천",
     "충전기", "건강식품", "스킨케어", "간식", "화장품",
   ];
-
-  useEffect(() => {
-    axios
-      .get("/api/projects")
-      .then((res) => setProjects(res.data))
-      .catch((err) => console.error("프로젝트 가져오기 실패", err));
-  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -65,6 +58,24 @@ const Home = () => {
     }
   };
 
+  // 🔽 추가: 검색 실행 함수
+  const handleSearch = () => {
+    // 입력값이 비어있지 않을 때만 검색 실행
+    if (searchInput.trim()) {
+      // 검색 드롭다운을 닫고, 검색 결과 페이지로 이동
+      setIsSearchFocused(false);
+      navigate(`/search?type=${searchType}&keyword=${encodeURIComponent(searchInput)}`);
+    } else {
+      alert("검색어를 입력해주세요.");
+    }
+  };
+
+  // 🔽 추가: 엔터 키 입력 처리 함수
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
   return (
     <>
       {/* 네비게이션 */}
@@ -79,27 +90,35 @@ const Home = () => {
             <li><Link to="/more">더보기 ▾</Link></li>
           </ul>
 
-          {/* 🔍 검색영역 */}
-          <div className="nav-search" ref={searchRef}>
-            <input
-              type="text"
-              placeholder="새로운 일상이 필요하신가요?"
-              value={searchInput}
-              onFocus={() => setIsSearchFocused(true)}
-              onChange={(e) => setSearchInput(e.target.value)}
-            />
-            <button>🔍</button>
-            {isSearchFocused && (
-              <SearchDropdown
-                keywords={recommendedKeywords}
-                onKeywordSelect={(keyword) => {
-                  setSearchInput(keyword);
-                  setIsSearchFocused(false);
-                }}
-                onClose={() => setIsSearchFocused(false)}
-              />
-            )}
-          </div>
+    <div className="nav-search" ref={searchRef}>
+      <div className="search-controls">
+        <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+          <option value="free">프리오더</option>
+          <option value="funding">펀딩</option>
+        </select>
+        <input
+          type="text"
+          placeholder="🦖 새로운 일상이 필요하신가요?"
+          value={searchInput}
+          onFocus={() => setIsSearchFocused(true)}
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button onClick={handleSearch}>🔍</button>
+      </div>
+
+      {isSearchFocused && (
+        <SearchDropdown
+          keywords={recommendedKeywords}
+          onKeywordSelect={(keyword) => {
+            setSearchInput(keyword);
+            setIsSearchFocused(false);
+            navigate(`/search?type=${searchType}&keyword=${encodeURIComponent(keyword)}`);
+          }}
+          onClose={() => setIsSearchFocused(false)}
+        />
+      )}
+    </div>
 
           <div className="nav-right">
             {isLoggedIn ? (

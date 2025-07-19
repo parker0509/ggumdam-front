@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // ✅ 추가
+import { useNavigate } from 'react-router-dom';
 import './FundingPlus.css';
+import './Nav.css';  // Nav.css 꼭 import 해주세요
 
 function FreeOrder() {
-  const [message, setMessage] = useState('');
   const [projects, setProjects] = useState([]);
-  const navigate = useNavigate(); // ✅ 추가
+  const navigate = useNavigate();
 
   useEffect(() => {
-
     axios.get('http://localhost:9000/api/funding-orders')
       .then(response => {
         setProjects(response.data);
@@ -24,16 +23,16 @@ function FreeOrder() {
       {/* 네비게이션 바 */}
       <nav className="custom-navbar">
         <div className="nav-container">
-          <a href="/" className="logo">꿈담</a>
-          <ul className="nav-menu">
-            <li><a href="/">홈</a></li>
-            <li><a href="/projects">프로젝트</a></li>
-            <li><a href="/about">소개</a></li>
-          </ul>
-          <div className="nav-search">
-            <input type="text" placeholder="검색어 입력" />
-            <button>🔥</button>
+          <div className="nav-left">
+            <a href="/" className="logo">꿈담</a>
+            <ul className="nav-menu">
+              <li><a href="/upcoming">오픈예정</a></li>
+              <li><a href="/fundplus">펀딩 +</a></li>
+              <li><a href="/freeorder">프리오더</a></li>
+              <li><a href="/more">더보기 ▾</a></li>
+            </ul>
           </div>
+
           <div className="nav-right">
             <a href="/login">로그인</a>
             <a href="/signup">회원가입</a>
@@ -42,13 +41,13 @@ function FreeOrder() {
         </div>
       </nav>
 
-      <main style={{ padding: '200px' }}>
+      <main style={{ padding: '100px' }}>
         <div className="project-grid">
           {projects.map((item, index) => (
             <div
               className="project-card"
               key={index}
-              onClick={() => navigate(`/funding-orders/${item.id}`)} // ✅ 상세 페이지 이동
+              onClick={() => navigate(`/funding-orders/${item.id}`)}
               style={{ cursor: 'pointer' }}
             >
               <img src={item.imageUrl} alt={item.productName || '프로젝트 이미지'} />

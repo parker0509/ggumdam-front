@@ -46,55 +46,57 @@ const Login = () => {
 
   return (
     <div className="login-wrapper">
-      <h1 className="login-logo">꿈담</h1>
+      <div className="login-container">
+          <h1 className="login-logo">꿈담</h1>
 
-      <div className="login-box">
-        {error && <div className="alert alert-danger">{error}</div>}
+          <div className="login-box">
+            {error && <div className="alert alert-danger">{error}</div>}
 
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="이메일 입력"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="비밀번호 입력"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit" className="email-login-btn">
-            이메일로 로그인하기
-          </button>
-        </form>
+            <form onSubmit={handleLogin}>
+              <input
+                type="email"
+                placeholder="이메일 입력"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="비밀번호 입력"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button type="submit" className="email-login-btn">
+                이메일로 로그인하기
+              </button>
+            </form>
 
-        <button className="kakao-btn" onClick={() => (window.location.href = kakaoAuthUrl)}>
-          카카오로 시작하기
-        </button>
-        <button className="naver-btn" onClick={() => (window.location.href = naverAuthUrl)}>
-          네이버로 시작하기
-        </button>
+            <button className="kakao-btn" onClick={() => (window.location.href = kakaoAuthUrl)}>
+              카카오로 시작하기
+            </button>
+            <button className="naver-btn" onClick={() => (window.location.href = naverAuthUrl)}>
+              네이버로 시작하기
+            </button>
 
-        <div className="social-icons">
-          <button onClick={() => window.location.href = googleAuthUrl}>
-            <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" />
-          </button>
+            <div className="social-icons">
+              <button onClick={() => window.location.href = googleAuthUrl}>
+                <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" />
+              </button>
 
-        </div>
+            </div>
 
-        <div className="login-links">
-          <Link to="#">아이디/비밀번호 찾기</Link> | <Link to="/register">회원가입</Link>
+            <div className="login-links">
+              <Link to="#">아이디/비밀번호 찾기</Link> | <Link to="/register">회원가입</Link>
+            </div>
+          </div>
+
+          <div className="qr-section">
+            <div className="qr-text">📱 QR코드로 앱 전용 쿠폰, 혜택 받기</div>
+            <img src="/1MdBB.jpg" alt="QR Code" className="qr-img" />
+          </div>
         </div>
       </div>
-
-      <div className="qr-section">
-        <div className="qr-text">📱 QR코드로 앱 전용 쿠폰, 혜택 받기</div>
-        <img src="/1MdBB.jpg" alt="QR Code" className="qr-img" />
-      </div>
-    </div>
   );
 };
 

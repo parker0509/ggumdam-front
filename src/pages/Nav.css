@@ -1,0 +1,72 @@
+.custom-navbar {
+  background-color: white;
+  border-bottom: 1px solid #eee;
+  padding: 10px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+}
+
+/* 왼쪽 로고 + 메뉴 묶음 */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* 로고와 메뉴 간격 */
+}
+
+/* nav-menu 왼쪽 정렬 */
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding-left: 0; /* ul 기본 패딩 제거 */
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+.nav-right a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.nav-right button,
+.nav-login-btn {
+  margin-left: 20px;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.project-btn {
+  padding: 6px 12px;
+  background-color: #00C4C4;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}
