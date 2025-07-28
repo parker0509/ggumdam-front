@@ -1,12 +1,11 @@
 
 ## 🎨 프론트엔드 - 꿈담(Ggumdam-Front)
  
+---
+## 메인 화면
+
  <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/4f466b04-4d10-4848-a956-3d9130123892" />
  <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/83214442-9e67-423f-a9a3-692382b2ad7d" />
-
-
-
----
 
 ## 🛠️ 기술 스택
 
@@ -18,7 +17,7 @@
 * **LocalStorage**: 사용자 토큰(Token) 저장
 
 --
-
+ 
 ### 🔐 인증 관련
 
 * `Login.js`, `LoginModal.js`: 로그인 기능 구현 및 JWT 토큰 저장
