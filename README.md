@@ -36,10 +36,6 @@
 * `FundingPlus.js`, `FundingPlusDetails.js`: 추가 펀딩형 상품 상세
 * `PurchasePage.js`: 리워드 구매 결제 페이지
 
-### 👤 마이페이지 및 기타
-
-* `Project.js`, `ProjectDetail.js`, `CreateProject.js`: 창작자 프로젝트 생성/관리
-* `Cart.js`: 장바구니 기능
 
 ---
 
