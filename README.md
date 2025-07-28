@@ -1,5 +1,7 @@
 
 # 🎨 프론트엔드 소개 - 꿈담(Ggumdam-Front)
+ 
+ <img width="1231" height="595" alt="image" src="https://github.com/user-attachments/assets/4f466b04-4d10-4848-a956-3d9130123892" />
 
 꿈담은 창작자와 소비자가 함께 만들어가는 크라우드 펀딩 기반 웹 플랫폼입니다. 프론트엔드는 사용자 경험 중심으로 구성되었으며, React 기반으로 페이지별 컴포넌트 구조를 명확히 분리하여 **유지보수성과 확장성을 고려해 개발**했습니다.
 
@@ -14,11 +16,7 @@
 * **JWT**: 로그인 상태 및 사용자 인증 유지
 * **LocalStorage**: 사용자 토큰(Token) 저장
 
----
-
-## 📁 폴더 구조 및 주요 컴포넌트
-
-`/src/pages/` 디렉토리 기준으로 주요 페이지별 구성은 다음과 같습니다:
+--
 
 ### 🔐 인증 관련
 
@@ -51,10 +49,16 @@
 * 백엔드와 연동하여 **실시간 검색 결과 자동완성 기능**을 구현했습니다.
 * 키워드 기반으로 `SearchResults` 페이지와 연동하여 검색 경험을 강화했습니다.
 
+<img width="1207" height="500" alt="image" src="https://github.com/user-attachments/assets/a4624058-7d37-4538-946f-7c44b9cec058" />
+
+
 ### ✅ JWT 기반 로그인 유지
 
 * **Axios 인터셉터를 사용하여 AccessToken을 모든 요청에 자동으로 주입**하도록 설정했습니다.
 * 사용자의 로그인 여부에 따라 **찜하기/공유하기 버튼의 노출을 제어**했습니다.
+
+<img width="1194" height="672" alt="image" src="https://github.com/user-attachments/assets/97fddebd-9c90-4722-bf4e-ad72493b21a8" />
+
 
 ### ✅ 찜하기, 공유하기 UI 구현
 
