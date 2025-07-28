@@ -35,7 +35,8 @@
 * `FreeOrder.js`, `FreeOrderDetails.js`: 프리오더 상품 상세 및 주문
 * `FundingPlus.js`, `FundingPlusDetails.js`: 추가 펀딩형 상품 상세
 * `PurchasePage.js`: 리워드 구매 결제 페이지
-
+ 
+<img width="1048" height="633" alt="image" src="https://github.com/user-attachments/assets/7eda6118-fb75-4f77-87d2-09b7c79e8624" />
 
 ---
 
