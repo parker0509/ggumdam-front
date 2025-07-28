@@ -1,5 +1,5 @@
 
-# 🎨 프론트엔드 소개 - 꿈담(Ggumdam-Front)
+## 🎨 프론트엔드 - 꿈담(Ggumdam-Front)
  
  <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/4f466b04-4d10-4848-a956-3d9130123892" />
  <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/83214442-9e67-423f-a9a3-692382b2ad7d" />
