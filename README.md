@@ -29,6 +29,7 @@
 
 * `Home.js`, `HomeSliderSection.js`: 메인 페이지 슬라이더 구성
 * `SearchDropdown.js`, `SearchResults.js`: **자동완성 검색 드롭다운 및 결과 페이지 구현**
+<img width="908" height="487" alt="image" src="https://github.com/user-attachments/assets/67c5f51e-19a2-4dd5-93a2-1d346cff6882" />
 
 ### 🎁 펀딩/리워드
 
