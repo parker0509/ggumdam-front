@@ -4,7 +4,7 @@
  <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/4f466b04-4d10-4848-a956-3d9130123892" />
  <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/83214442-9e67-423f-a9a3-692382b2ad7d" />
 
-꿈담은 창작자와 소비자가 함께 만들어가는 크라우드 펀딩 기반 웹 플랫폼입니다. 프론트엔드는 사용자 경험 중심으로 구성되었으며, React 기반으로 페이지별 컴포넌트 구조를 명확히 분리하여 **유지보수성과 확장성을 고려해 개발**했습니다.
+
 
 ---
 
